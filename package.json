@@ -9,7 +9,11 @@
   "author": "Dara Carolan",
   "license": "ISC",
   "dependencies": {
-    "bootstrap": "^3.3.6"
+    "babel-loader": "^6.2.4",
+    "bootstrap": "^3.3.6",
+    "express": "^4.13.4",
+    "react": "^15.1.0",
+    "webpack": "^1.13.1"
   },
   "devDependencies": {},
   "repository": {
