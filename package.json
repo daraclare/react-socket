@@ -1,0 +1,28 @@
+{
+  "name": "react-socket",
+  "version": "1.0.0",
+  "description": "React tutorial",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Dara Carolan",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^3.3.6"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/daraclare/react-socket.git"
+  },
+  "keywords": [
+    "React",
+    "Socket",
+    "Tutorial"
+  ],
+  "bugs": {
+    "url": "https://github.com/daraclare/react-socket/issues"
+  },
+  "homepage": "https://github.com/daraclare/react-socket#readme"
+}
