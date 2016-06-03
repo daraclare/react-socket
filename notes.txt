@@ -1,0 +1,5 @@
+if else statements in react:
+ return (condition) ? “this condition is true” : “the condition is false”;
+
+
+‘push’ adds an item to an array

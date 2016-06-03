@@ -3,6 +3,7 @@ var app = express();
 
 var connections = [];
 var title = 'Untitled Presentation';
+var audience = [];
 
 app.use(express.static('./public'));
 app.use(express.static('./node_modules/bootstrap/dist'));
@@ -16,6 +17,17 @@ io.sockets.on('connection', function (socket) {
         connections.splice(connections.indexOf(socket), 1);
         socket.disconnect();
         console.log("Disconnected: %s sockets remaining.", connections.length);
+    });
+
+    socket.on('join', function(payload) {
+        var newMember = {
+          id: this.id,
+          name: payload.name
+        };
+        this.emit('joined', newMember);
+        audience.push(newMember);
+        io.sockets.emit('audience', audience);
+        console.log("Audience Joined: %s", payload.name);
     });
 
     socket.emit('welcome', {
