@@ -3,3 +3,6 @@ if else statements in react:
 
 
 ‘push’ adds an item to an array
+
+
+‘splice’ removes disconnected member
