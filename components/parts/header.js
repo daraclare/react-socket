@@ -10,7 +10,6 @@ var Header = React.createClass({
         return {
             status: 'disconnected'
         }
-
     },
 
     render() {
