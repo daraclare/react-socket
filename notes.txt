@@ -17,3 +17,6 @@ props
 propsTypes
 className
 map
+this.state
+keys
+lifecycle functions
