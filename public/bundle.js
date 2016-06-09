@@ -55,8 +55,8 @@
 	var APP = __webpack_require__(196);
 	var Audience = __webpack_require__(250);
 	var Speaker = __webpack_require__(253);
-	var Board = __webpack_require__(254);
-	var Whoops404 = __webpack_require__(255);
+	var Board = __webpack_require__(255);
+	var Whoops404 = __webpack_require__(256);
 
 	var routes = React.createElement(
 	    Route,
@@ -23580,7 +23580,8 @@
 				status: 'disconnected',
 				title: '',
 				member: {},
-				audience: []
+				audience: [],
+				speaker: ''
 			};
 		},
 
@@ -23588,9 +23589,10 @@
 			this.socket = io('http://localhost:3000');
 			this.socket.on('connect', this.connect);
 			this.socket.on('disconnect', this.disconnect);
-			this.socket.on('welcome', this.welcome);
+			this.socket.on('welcome', this.updateState);
 			this.socket.on('joined', this.joined);
 			this.socket.on('audience', this.updateAudience);
+			this.socket.on('start', this.updateState);
 		},
 
 		emit: function emit(eventName, payload) {
@@ -23612,8 +23614,8 @@
 			this.setState({ status: 'disconnected' });
 		},
 
-		welcome: function welcome(serverState) {
-			this.setState({ title: serverState.title });
+		updateState: function updateState(serverState) {
+			this.setState(serverState);
 		},
 
 		joined: function joined(member) {
@@ -23629,7 +23631,7 @@
 			return React.createElement(
 				'div',
 				null,
-				React.createElement(Header, { title: this.state.title, status: this.state.status }),
+				React.createElement(Header, this.state),
 				React.createElement(RouteHandler, _extends({ emit: this.emit }, this.state))
 			);
 		}
@@ -30882,6 +30884,11 @@
 	                    'h1',
 	                    null,
 	                    this.props.title
+	                ),
+	                React.createElement(
+	                    'p',
+	                    null,
+	                    this.props.speaker
 	                )
 	            ),
 	            React.createElement(
@@ -30982,6 +30989,7 @@
 	'use strict';
 
 	var React = __webpack_require__(1);
+	var Link = __webpack_require__(157).Link;
 
 	var Join = React.createClass({
 	    displayName: 'Join',
@@ -31000,11 +31008,19 @@
 	                null,
 	                'Full Name'
 	            ),
-	            React.createElement('input', { ref: "name", className: "form-control", placeholder: "please enter your name", required: true }),
+	            React.createElement('input', { ref: "name",
+	                className: "form-control",
+	                placeholder: "please enter your name",
+	                required: true }),
 	            React.createElement(
 	                'button',
 	                { className: "btn btn-primary" },
 	                'Join'
+	            ),
+	            React.createElement(
+	                Link,
+	                { to: "/speaker" },
+	                'Join as speaker'
 	            )
 	        );
 	    }
@@ -31019,16 +31035,44 @@
 	'use strict';
 
 	var React = __webpack_require__(1);
+	var Display = __webpack_require__(251);
+	var JoinSpeaker = __webpack_require__(254);
 
 	var Speaker = React.createClass({
 	    displayName: 'Speaker',
 
 	    render: function render() {
 	        return React.createElement(
-	            'h1',
+	            'div',
 	            null,
-	            'Speaker : ',
-	            this.props.status
+	            React.createElement(
+	                Display,
+	                { 'if': this.props.status === 'connected' },
+	                React.createElement(
+	                    Display,
+	                    { 'if': this.props.member.name && this.props.member.type === 'speaker' },
+	                    React.createElement(
+	                        'p',
+	                        null,
+	                        'Questions'
+	                    ),
+	                    React.createElement(
+	                        'p',
+	                        null,
+	                        'Attendance'
+	                    )
+	                ),
+	                React.createElement(
+	                    Display,
+	                    { 'if': !this.props.member.name },
+	                    React.createElement(
+	                        'h2',
+	                        null,
+	                        'Start the presentation'
+	                    ),
+	                    React.createElement(JoinSpeaker, { emit: this.props.emit })
+	                )
+	            )
 	        );
 	    }
 	});
@@ -31037,6 +31081,56 @@
 
 /***/ },
 /* 254 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(1);
+
+	var JoinSpeaker = React.createClass({
+	    displayName: 'JoinSpeaker',
+
+	    start: function start() {
+	        var speakerName = React.findDOMNode(this.refs.name).value;
+	        var title = React.findDOMNode(this.refs.title).value;
+	        this.props.emit('start', { name: speakerName, title: title });
+	    },
+
+	    render: function render() {
+	        return React.createElement(
+	            'form',
+	            { action: "javascript:void(0)", onSubmit: this.start },
+	            React.createElement(
+	                'label',
+	                null,
+	                'Full Name'
+	            ),
+	            React.createElement('input', { ref: "name",
+	                className: "form-control",
+	                placeholder: "please enter your name",
+	                required: true }),
+	            React.createElement(
+	                'label',
+	                null,
+	                'Presentation Title'
+	            ),
+	            React.createElement('input', { ref: "title",
+	                className: "form-control",
+	                placeholder: "Please enter a title for the presentation",
+	                required: true }),
+	            React.createElement(
+	                'button',
+	                { className: "btn btn-primary" },
+	                'Join'
+	            )
+	        );
+	    }
+	});
+
+	module.exports = JoinSpeaker;
+
+/***/ },
+/* 255 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31060,7 +31154,7 @@
 	module.exports = Board;
 
 /***/ },
-/* 255 */
+/* 256 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
