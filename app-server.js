@@ -6,6 +6,7 @@ var connections = [];
 var title = 'No Presentation Available';
 var audience = [];
 var speaker = {};
+var questions = require('./app-questions');
 
 app.use(express.static('./public'));
 app.use(express.static('./node_modules/bootstrap/dist'));
@@ -39,7 +40,7 @@ io.sockets.on('connection', function (socket) {
         var newMember = {
           id: this.id,
           name: payload.name,
-          type: 'member'
+          type: 'audience'
         };
         this.emit('joined', newMember);
         audience.push(newMember);
@@ -60,7 +61,8 @@ io.sockets.on('connection', function (socket) {
     socket.emit('welcome', {
         title: title,
         audience: audience,
-        speaker: speaker.name
+        speaker: speaker.name,
+        questions: questions
     });
 
     connections.push(socket);

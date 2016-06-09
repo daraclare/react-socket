@@ -13,7 +13,8 @@ var APP = React.createClass({
 			title: '',
 			member: {},
 			audience: [],
-			speaker: ''
+			speaker: '',
+			questions: []
 		}
 	},
 
@@ -26,7 +27,6 @@ var APP = React.createClass({
 		this.socket.on('audience', this.updateAudience);
 		this.socket.on('start', this.start);
 		this.socket.on('end', this.updateState);
-
 	},
 	
 	emit(eventName, payload) {

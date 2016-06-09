@@ -7,4 +7,3 @@ var Board = React.createClass({
 });
 
 module.exports = Board;
-

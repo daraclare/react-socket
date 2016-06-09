@@ -21,10 +21,8 @@ var Audience = React.createClass({
 
                 </Display>
             </div>
-
         );
     }
 });
 
 module.exports = Audience;
-

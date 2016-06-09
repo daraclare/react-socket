@@ -7,6 +7,3 @@ var Display = React.createClass({
 });
 
 module.exports = Display;
-
-
-

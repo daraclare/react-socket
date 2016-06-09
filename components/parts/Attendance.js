@@ -14,7 +14,7 @@ var Attendance = React.createClass({
     render() {
         return(
             <div>
-                <h2>Attendance: {this.props.audience.length} members</h2>
+                <h2>Attendance - {this.props.audience.length}</h2>
                 <table className="table table-striped">
                     <thead>
                         <tr>
@@ -23,7 +23,9 @@ var Attendance = React.createClass({
                         </tr>
                     </thead>
                     <tbody>
+
                         {this.props.audience.map(this.addMemberRow)}
+
                     </tbody>
                 </table>
             </div>
