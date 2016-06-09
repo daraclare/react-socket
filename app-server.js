@@ -3,7 +3,7 @@ var _ = require('underscore');
 var app = express();
 
 var connections = [];
-var title = 'Untitled Presentation';
+var title = 'No Presentation Available';
 var audience = [];
 var speaker = {};
 
@@ -23,6 +23,11 @@ io.sockets.on('connection', function (socket) {
             audience.splice(audience.indexOf(member), 1);
             io.sockets.emit('audience', audience);
             console.log('Left: %s (%s audience members)', member.name, audience.length);
+        } else if (this.id === speaker.id) {
+            console.log("%s has left. The presentation '%s' is over.", speaker.name, title);
+            speaker = {};
+            title = "No Presentation Available";
+            io.sockets.emit('end', { title: title, speaker: '' });
         }
 
         connections.splice(connections.indexOf(socket), 1);
@@ -48,7 +53,7 @@ io.sockets.on('connection', function (socket) {
        speaker.type = 'speaker';
        title = payload.title;
        this.emit('joined', speaker);
-        io.sockets.emit('start', { title: title, speaker: speaker.name });
+       io.sockets.emit('start', { title: title, speaker: speaker.name });
        console.log("Presentation Started: '%s' by %s", title, speaker.name);
     });
 
