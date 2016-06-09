@@ -12,3 +12,6 @@ chapter 5, 01 this was missing from app-server.js “title = payload.title;” s
 
 what is socket.io?
 what is express?
+createClass
+props 
+propsTypes
