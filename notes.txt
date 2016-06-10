@@ -17,3 +17,10 @@ props
 propsTypes
 className
 map
+this.state
+keys
+lifecycle functions
+
+
+npm install react-d3@0.3.1
+var BarChart = require('react-d3/barchart').BarChart;
