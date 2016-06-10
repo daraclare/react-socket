@@ -10,13 +10,13 @@ if else statements in react:
 
 chapter 5, 01 this was missing from app-server.js “title = payload.title;” so no title showed up.
 
-what is socket.io?
-what is express?
+refs
+
 createClass
 props 
 propsTypes
 className
-map
+
 this.state
 keys
 lifecycle functions

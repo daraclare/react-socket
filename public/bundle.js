@@ -31080,9 +31080,14 @@
 
 	'use strict';
 
-	var React = __webpack_require__(1);
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
 	var Display = __webpack_require__(251);
-	var Ask = React.createClass({
+	var Ask = _react2['default'].createClass({
 	    displayName: 'Ask',
 
 	    getInitialState: function getInitialState() {
@@ -31121,7 +31126,7 @@
 	    addChoiceButton: function addChoiceButton(choice, i) {
 
 	        var buttonTypes = ['primary', 'success', 'warning', 'danger'];
-	        return React.createElement(
+	        return _react2['default'].createElement(
 	            'button',
 	            { key: i,
 	                className: "col-xs-12 col-sm-6 btn btn-" + buttonTypes[i],
@@ -31133,33 +31138,33 @@
 	    },
 
 	    render: function render() {
-	        return React.createElement(
+	        return _react2['default'].createElement(
 	            'div',
 	            { id: "currentQuestion" },
-	            React.createElement(
+	            _react2['default'].createElement(
 	                Display,
 	                { 'if': this.state.answer },
-	                React.createElement(
+	                _react2['default'].createElement(
 	                    'h3',
 	                    null,
 	                    'You answered: ',
 	                    this.state.answer
 	                ),
-	                React.createElement(
+	                _react2['default'].createElement(
 	                    'p',
 	                    null,
 	                    this.props.question[this.state.answer]
 	                )
 	            ),
-	            React.createElement(
+	            _react2['default'].createElement(
 	                Display,
 	                { 'if': !this.state.answer },
-	                React.createElement(
+	                _react2['default'].createElement(
 	                    'h2',
 	                    null,
 	                    this.props.question.q
 	                ),
-	                React.createElement(
+	                _react2['default'].createElement(
 	                    'div',
 	                    { className: "row" },
 	                    this.state.choices.map(this.addChoiceButton)
